@@ -25,7 +25,7 @@ The detailed discussion about the business implication of the project has been s
 
 * Geodata can help us to identify the highperforming billboards. In fact, less than 1% of all the billboards in Kuala Lumpur attract more than 70,000 audiences.
 * Higher number of POIs in the vicinity of the Billboards draw more audiences.
-* Geodata can also help us in selecting the locations for building the next billboards by identifying the areas that attracts higher number of audiences.
+* Geodata can also help us in selecting the locations for building the next billboards. It can help us to identify the areas that attracts higher number of audiences.
 
 ### Acknowledgement
-A big shout out to [Moving Walls](https://www.movingwalls.com/moving-walls-plan-buy-and-measure-outcome-based-outdoor-advertising) for innovating OOH media. 
+The data is based on the work done by [Moving Walls](https://www.movingwalls.com/moving-walls-plan-buy-and-measure-outcome-based-outdoor-advertising). A big shout out to them.
