@@ -1,7 +1,8 @@
 from setuptools import setup
 
-setup(name = "distributions",
-        version = "0.1",
+setup(name = "point-distance",
+        version = "1.0",
         description = "Find distance between points",
-        packages = ["distributions"],
+        packages = ["point-distance"],
+        author = "Abdullah Reza"
         zip_safe = False)
