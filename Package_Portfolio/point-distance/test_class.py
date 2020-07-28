@@ -5,7 +5,7 @@ Created on Tue Jul 28 09:37:48 2020
 @author: Reza
 """
 
-from point_distance import EuclideanPoints, GeodesicPoints
+from .PointDistance import EuclideanPoints, GeodesicPoints
 
 euclideanDistance = EuclideanPoints((0,3), (4,0))
 print(euclideanDistance.distance)
