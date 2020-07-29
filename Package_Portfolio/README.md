@@ -8,3 +8,9 @@ The objective of the project is to create a python package and upload it to PyPI
 ### Problem Statement
 1. Determine distance between two points in geodesic plane, specifically distance between two points on earth.
 2. Determine distance between two points in euclidean space, specifically 2-D space.
+
+### Installation
+`pip install point-distance`
+
+### Usage
+`from point-distance import PointDistance`
