@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name = "pointdistance",
-        version = "1.0",
+        version = "0.1",
         description = "Find distance between points",
         packages = ["pointdistance"],
         author = "Abdullah Reza",
