@@ -111,3 +111,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# avg / total       0.74      0.60      0.64     16809

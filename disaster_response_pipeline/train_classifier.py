@@ -26,10 +26,11 @@ from sklearn.metrics import classification_report, accuracy_score
 # Load data from database
 def load_data(database_filepath):
     """
-    Load data from the sqlite database
+    Method for loading data from the sqlite database
     
-    input:
-        database_filepath: sql db filepath
+    Args:
+        database_filepath (str): sqlite database filepath
+        
     output:
         X: Input training dataset
         Y: Output training dataset
