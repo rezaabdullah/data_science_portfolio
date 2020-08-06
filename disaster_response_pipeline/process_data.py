@@ -7,8 +7,6 @@ from sqlalchemy import create_engine
 def load_data(messages_filepath, categories_filepath):
     """
     Method for reading two CSV files and merge into one pandas dataframe
-    
-    The function reads CSV file of messages and categories and merge them into one pandas dataframe
 
     Args:
         messages_filepath (str): The .csv file path of messages dataset
