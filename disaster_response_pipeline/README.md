@@ -6,7 +6,7 @@ In this project, disaster data obtained from Figure Eight will be analyzed and a
 ### Description of Files
 To create end-to-end solution, the project adhere to the three steps of data science. The files are organized into the steps they belong to.
 1. ETL Process (Data Preprocessing): `data` 
-2. Building Models (Data Processing): `models`
+2. Training Models (Data Processing): `models`
 3. Create Dashboard (Data Postprocessing): `app`
 
 ```
@@ -19,12 +19,33 @@ To create end-to-end solution, the project adhere to the three steps of data sci
 - data
 |- disaster_categories.csv  # data to process 
 |- disaster_messages.csv    # data to process
-|- process_data.py
+|- process_data.py          # ETL Script
 |- DisasterResponse.db      # database to save clean data to
 
 - models
-|- train_classifier.py
+|- train_classifier.py      # ML Script
 |- classifier.pkl           # saved model 
 
 - README.md
+- LICENSE
 ```
+
+### Brief Overview of the Processes
+1. ETL Process
+There are two datasets: one containing the messages and the other containing the labels i.e. categories of disaster response. The two datasets were merged and categories data were transformed. Next, the data were normalized, cleaned and stored into SQLite database for future use.
+
+2. Training Model
+A classification model was trained for classifying the messages with the help of NLP processes and scikit-learn library. The train model was stored into a pickle (.pkl) file.
+
+3. Run the Web App
+Lastly, the model were deployed on the web for real time message classification.
+
+### Instructions
+1. Run the following commands in the project's root directory to set up your database and model.  
+    - To run ETL pipeline that cleans data and stores in database:  
+        `python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db`
+    - To run ML pipeline that trains classifier and saves model:  
+        `python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl`  
+2. Run the following command in the app's directory to run your web app.  
+        `python run.py`  
+3. Go to http://0.0.0.0:3001/
