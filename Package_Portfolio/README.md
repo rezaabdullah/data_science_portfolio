@@ -17,10 +17,14 @@ In this project software engineering practices will be applied to create a pytho
 ### Instructions
 ```python
 pip install pointdistance
-
-# For Geodesic Points
+```
+```python
+# Import package
+# Measure Geodesic distance
 from pointdistance import GeodesicPoints
+geodesicPoints = GeodesicPoints((latitude_1, longitude_1), (latitude_2, longitude_2))
 
-# For Euclidean Points
+# Measure Euclidean distance
 from pointdistance import EuclideanPoints
+euclideanPoints = EuclideanPoints((x_1, y_1), (x_2, y_2))
 ```
