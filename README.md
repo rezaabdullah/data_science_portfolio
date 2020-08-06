@@ -1,5 +1,5 @@
 # Data-Science-Portfolio
-Repository for projects and coursework for Data Scientist Nanodegree Program by Udacity
+Projects and coursework repository for Data Scientist Nanodegree Program by Udacity
 
 ### Repository Structure
 This is the parent repo which has different directory, each assigned to different individual projects. This is an going work. 
