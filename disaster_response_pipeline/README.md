@@ -31,14 +31,14 @@ To create end-to-end solution, the project adhere to the three steps of data sci
 ```
 
 ### Brief Overview of the Processes
-1. ETL Process
-There are two datasets: one containing the messages and the other containing the labels i.e. categories of disaster response. The two datasets were merged and categories data were transformed. Next, the data were normalized, cleaned and stored into SQLite database for future use.
+1. ETL Process  
+    There are two datasets: one containing the messages and the other containing the labels i.e. categories of disaster response. The two datasets were merged and categories data were transformed. Next, the data were normalized, cleaned and stored into SQLite database for future use.
 
-2. Training Model
-A classification model was trained for classifying the messages with the help of NLP processes and scikit-learn library. The train model was stored into a pickle (.pkl) file.
+2. Training Model  
+    A classification model was trained for classifying the messages with the help of NLP processes and scikit-learn library. The train model was stored into a pickle (.pkl) file.
 
-3. Run the Web App
-Lastly, the model were deployed on the web for real time message classification.
+3. Run the Web App  
+    Lastly, the model were deployed on the web for real time message classification.
 
 ### Instructions
 1. Run the following commands in the project's root directory to set up your database and model.  
