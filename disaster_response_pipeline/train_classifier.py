@@ -1,26 +1,28 @@
 # Import libraries
 import sys
 import pandas as pd
-import numpy as np
-
 from sqlalchemy import create_engine
 
-import re
-import pickle
 import nltk
 nltk.download(['punkt', 'wordnet', "stopwords"])
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
+import re
 
-from sklearn.ensemble import AdaBoostClassifier
+import warnings
+warnings.filterwarnings("ignore")
+
 from sklearn.pipeline import Pipeline
+from sklearn.model_selection import train_test_split, GridSearchCV
+
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+
 from sklearn.multioutput import MultiOutputClassifier
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import precision_score, recall_score, f1_score
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import GridSearchCV
+#from sklearn.multiclass import OneVsRestClassifier
+from sklearn.ensemble import RandomForestClassifier
+
+from sklearn.externals import joblib
 from sklearn.metrics import classification_report, accuracy_score
 
 # Load data from database
@@ -29,123 +31,116 @@ def load_data(database_filepath):
     Method for loading data from the sqlite database
     
     Args:
-        database_filepath (str): sqlite database filepath
+        database_filepath (str): sqlite db filepath
         
     output:
-        X: Input training dataset
-        Y: Output training dataset
+        X (numpy.ndarray): Input training dataset
+        Y (numpy.ndarray): Output training dataset
         category_names: Labels for categories
     """
     
-    # Load the dataset to dataframe
-    engine = create_engine('sqlite:///{}'.format(database_filepath))
-    df = pd.read_sql_table('messages', con=engine)
-
-    # Split the dataframe into x and y
-    X = df['message']
-    Y = df.drop(columns=['id','message','original','genre'])
-    #Y = df[df.columns[4:]].values
-    #Y = df.loc[:, [4:]].values
-
-    # Get the label names
-    category_names = Y.columns
-
+    engine = create_engine("sqlite:///{}".format(database_filepath))
+    df = pd.read_sql_table("messages", con = engine)
+    X = df.message.values
+    Y = df[df.columns[4:]].values
+    category_names = list(df.columns[4:])
+    
     return X, Y, category_names
 
-# Write a tokenization function to process your text data
 def tokenize(text):
     """
-    Tokenize and lemmatize each word in a given text
+    Method for tokenizing words
     
-    input:
-        text: Tokenize messages
+    Args:
+        text (str): Message data for tokenization
+        
     output:
-        clean_tokens: Result list after tokenization.
+        clean_tokens (str): Result list after tokenization
     """
-
-    # Normalise the texts and remove punctuation
-    text = re.sub(r"[^\w\s]", " ", text.lower())
     
-    # Create token
+    text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
     tokens = word_tokenize(text)
-    
-    # Remove stopwords
-    tokens = [word for word in tokens if word not in stopwords.words("english")]
-    
-    # Lemmatise each words
     lemmatizer = WordNetLemmatizer()
-    clean_tokens = [lemmatizer.lemmatize(word) for word in tokens]
 
-    # Lemmatize each word in tokens
-    """
     clean_tokens = []
     for tok in tokens:
         clean_tok = lemmatizer.lemmatize(tok).lower().strip()
         clean_tokens.append(clean_tok)
-    """
+    
+    clean_tokens = [word for word in clean_tokens if word not in stopwords.words("english")]
+    
     return clean_tokens
 
-# Build a machine learning pipeline
+# Build ML Model
 def build_model():
     """
-    Creates machine learning pipeline for learning
+    Method for training model by creating ML pipeline and Grid Search for finding best parameters
     
-    :Input:
-        :None: Doesn't require an input
-    :Returns:
-        :pipeline: Machine Learning pipeline with fit/predict methods
+    Args:
+        None
+        
+    output:
+        cv_results_ (dict of numpy ndarrays): Model Result
     """
-
-    # Create a pipeline consists of count vectorizer -> KneighborsClassifier()
+    
     pipeline = Pipeline([
-        ('text_pipeline', Pipeline([
-            ('vect', CountVectorizer(tokenizer=tokenize)),
-            ('tfidf', TfidfTransformer())
-        ])),
-        ('clf', MultiOutputClassifier(KNeighborsClassifier()))
+        ('vect', CountVectorizer(tokenizer=tokenize)),
+        ('tfidf', TfidfTransformer()),
+        ('clf', MultiOutputClassifier(RandomForestClassifier(random_state = 0)))
     ])
-
-    ## Find the optimal model using GridSearchCV
+    
     parameters = {
-        'text_pipeline__tfidf__use_idf': (True, False),
-        'clf__estimator__weights': ['uniform', 'distance']
+                'tfidf__smooth_idf':[True, False],
+                'clf__estimator__n_estimators': [100, 110, 120]
     }
+    
+    cv = GridSearchCV(pipeline, param_grid = parameters, scoring = 'precision_samples', cv = 5, verbose = 5, n_jobs = -1)
+    
+    return cv
 
-    pipeline = GridSearchCV(pipeline, param_grid=parameters, verbose=5, cv=2, n_jobs=2)
-
-    return pipeline
-
-
+# ML Model evaluation
 def evaluate_model(model, X_test, Y_test, category_names):
-    """Display the classification report for the given model"""
-
-    # Predict the given X_test and create the report based on the Y_pred
+    """
+    Method for evaluating model performance
+    
+    Args:
+        model (dict of numpy ndarray): Classifier model
+        X_test (numpy ndarray): Test input dataset
+        Y_test (numpy ndarray): Test output dataset
+    
+    output:
+        None
+    """
+    
     Y_pred = model.predict(X_test)
-    print(classification_report(Y_test, Y_pred, target_names=category_names))
+    
+    print(classification_report(Y_test, Y_pred, target_names = category_names))
+    print("..................................................")
+    for i in range(Y_test.shape[1]):
+        print("%25s accuracy : %.2f" %(category_names[i], accuracy_score(Y_test[:, i], Y_pred[:, i])))
 
-
+# Store the model
 def save_model(model, model_filepath):
-    """Save the given model into pickle object"""
+    """
+    Method for saving the model in pickle file
+    """
+    
+    joblib.dump(model, model_filepath)
 
-    # Save the model based on model_filepath given
-    pkl_filename = '{}'.format(model_filepath)
-    with open(pkl_filename, 'wb') as file:
-        pickle.dump(model, file)
-
-
+# Main function
 def main():
     if len(sys.argv) == 3:
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
         X, Y, category_names = load_data(database_filepath)
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
-        
+
         print('Building model...')
         model = build_model()
-        
+
         print('Training model...')
         model.fit(X_train, Y_train)
-        
+
         print('Evaluating model...')
         evaluate_model(model, X_test, Y_test, category_names)
 

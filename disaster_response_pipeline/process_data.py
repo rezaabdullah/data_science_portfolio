@@ -1,4 +1,4 @@
-# Import modules
+# Import libraries
 import sys
 import pandas as pd
 from sqlalchemy import create_engine
@@ -57,10 +57,10 @@ def clean_data(df):
     
     # Some rows on related column has value of 2
     # Replace 2 with 1
-    categories['related'] = categories['related'].replace(2, 1)
+    categories["related"] = categories["related"].replace(2, 1)
     
     # Replace categories column in df with new category columns
-    df.drop('categories', axis = 1, inplace = True)
+    df.drop("categories", axis = 1, inplace = True)
     
     # Concatenate the original dataframe with the new `categories` dataframe
     df = pd.concat([df, categories], axis = 1)
@@ -83,8 +83,8 @@ def save_data(df, database_filename):
         None
     """
 
-    engine = create_engine('sqlite:///{}'.format(database_filename))
-    df.to_sql('messages', engine, index = False)
+    engine = create_engine("sqlite:///{}".format(database_filename))
+    df.to_sql("messages", engine, index = False)
 
 def main():
     if len(sys.argv) == 4:
