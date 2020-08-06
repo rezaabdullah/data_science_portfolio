@@ -23,8 +23,10 @@ pip install pointdistance
 # Measure Geodesic distance
 from pointdistance import GeodesicPoints
 geodesicPoints = GeodesicPoints((latitude_1, longitude_1), (latitude_2, longitude_2))
+print(geodesicPoints.distance)
 
 # Measure Euclidean distance
 from pointdistance import EuclideanPoints
 euclideanPoints = EuclideanPoints((x_1, y_1), (x_2, y_2))
+print(euclideanPoints.distance)
 ```
