@@ -8,9 +8,6 @@ In this project software engineering practices will be applied to create a pytho
 
 **Distance between Two Points on Euclidean Plane (2-D):** Distance between two points lying on a 2D plane can be determined by using the formula: `sqrt((x1-x2)^2 + (y1-y2)^2))`
 
-### Description of the Files
-
-
 ### Required Libraries
 1. math
 
@@ -30,3 +27,6 @@ from pointdistance import EuclideanPoints
 euclideanPoints = EuclideanPoints((x_1, y_1), (x_2, y_2))
 print(euclideanPoints.distance)
 ```
+
+### Acknowledgement
+[Haversine formula](https://www.movable-type.co.uk/scripts/latlong.html)
