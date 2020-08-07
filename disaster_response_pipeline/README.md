@@ -69,5 +69,3 @@ The model is a RandomForest classifier and it takes about couple of hours to tra
 ### Acknowledgement
 - [Figure Eight](https://appen.com/) (They have been recently acquired by Appen)
 - [Udacity](https://www.udacity.com/)
-
-**Note:** File larger than 50MB invokes warning
