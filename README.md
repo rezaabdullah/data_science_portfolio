@@ -8,6 +8,7 @@ This is the parent repo which has different directory, each assigned to differen
 2. Introduction to Data Science  
   2.1 [Project 1](https://github.com/rezaabdullah/data_science_portfolio/tree/master/Project_1): Writing a Data Science Blog Post  
   2.2 [Project 2](https://github.com/rezaabdullah/data_science_portfolio): Optimize your GitHub Profile (submitted for review)  
+  **Note:** Project 2 refers to this repo
 3. Software Engineering  
   3.1 [Portfolio Exercise](https://github.com/rezaabdullah/data_science_portfolio/tree/master/Package_Portfolio): Upload a Package to PyPi  
   3.2 Portfolio Exercise: Deploy a Data Dashboard (under development)  
