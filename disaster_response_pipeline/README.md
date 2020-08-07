@@ -3,6 +3,16 @@
 ### Project Motivation
 In this project, disaster data obtained from Figure Eight will be analyzed and a classifier model will be developed to classify the messages for facilitating faster response from the various emergency teams. The dataset contains pre-labelled tweet and messages from real-life disaster events. The objective of the project is to build a Natural Language Processing (NLP) model to categorize messages on a real time that can be relayed to appropriate emergency response teams to take necessary actions.
 
+### Brief Overview of the Processes
+1. ETL Process  
+    There are two datasets: one containing the messages and the other containing the labels i.e. categories of disaster response. The two datasets were merged and categories data were transformed. Next, the data were normalized, cleaned and stored into SQLite database for future use.
+
+2. Training Model  
+    A classification model was trained for classifying the messages with the help of NLP processes and scikit-learn library. The train model was stored into a pickle (.pkl) file.
+
+3. Run the Web App  
+    Lastly, the model were deployed on the web for real time message classification.
+
 ### Description of Files
 To create end-to-end solution, the project adhere to the three steps of data analysis and the files are organized into the steps they belong to.
 1. ETL Process (Data Preprocessing): `data` 
@@ -30,16 +40,6 @@ To create end-to-end solution, the project adhere to the three steps of data ana
 - LICENSE
 ```
 
-### Brief Overview of the Processes
-1. ETL Process  
-    There are two datasets: one containing the messages and the other containing the labels i.e. categories of disaster response. The two datasets were merged and categories data were transformed. Next, the data were normalized, cleaned and stored into SQLite database for future use.
-
-2. Training Model  
-    A classification model was trained for classifying the messages with the help of NLP processes and scikit-learn library. The train model was stored into a pickle (.pkl) file.
-
-3. Run the Web App  
-    Lastly, the model were deployed on the web for real time message classification.
-
 ### Instructions
 1. Run the following commands in the project's root directory to set up your database and model.  
     - To run ETL pipeline that cleans data and stores in database:  
@@ -49,3 +49,16 @@ To create end-to-end solution, the project adhere to the three steps of data ana
 2. Run the following command in the app's directory to run your web app.  
         `python run.py`  
 3. Go to http://0.0.0.0:3001/
+
+### Improvements
+The model is a RandomForest classifier and it takes about couple of hours to train the model. Furthermore, if the number of feature i.e. number of tress are more than 150, the training process out of memory. Since the problem is multiclass multioutput problem, **Multinomial Naive Bayes** classifier can significantly improve the model performance.
+
+### Required Libraries
+1. Pandas, Sciki-Learn
+2. NLTK
+3. SQLalchemy
+4. Pickle
+5. Flask, Plotly
+
+### Acknowledgement
+
