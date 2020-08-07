@@ -51,7 +51,7 @@ To create end-to-end solution, the project adhere to the three steps of data ana
 3. Go to http://0.0.0.0:3001/
 
 ### Improvements
-The model is a RandomForest classifier and it takes about couple of hours to train the model. Furthermore, if the number of feature i.e. number of tress are more than 150, the training process out of memory. Since the problem is multiclass multioutput problem, **Multinomial Naive Bayes** classifier can significantly improve the model performance.
+The model is a RandomForest classifier and it takes about couple of hours to train the model. Furthermore, if the number of feature i.e. number of tress are more than 150, the training process out of memory. Since the problem is a multiclass multioutput problem, **Multinomial Naive Bayes** classifier can significantly improve the training performance with comparatively similar model performance.
 
 ### Required Libraries
 1. Pandas, Sciki-Learn
@@ -61,4 +61,5 @@ The model is a RandomForest classifier and it takes about couple of hours to tra
 5. Flask, Plotly
 
 ### Acknowledgement
-
+- [Figure Eight](https://appen.com/) (They have been acquired by Appen)
+- [Udacity](https://www.udacity.com/)
