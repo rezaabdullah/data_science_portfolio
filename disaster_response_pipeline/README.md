@@ -61,8 +61,8 @@ The model is a RandomForest classifier and it takes about couple of hours to tra
 5. Flask, Plotly
 
 ### Example of the Dashboard
-![Message Classification](/images/classification_result.jpg)
-![Distribution of Message Genre](/images/msg_dist.png)
+![Message Classification](images/classification_result.jpg)  
+![Distribution of Message Genre](images/msg_dist.png)
 ![Distribution of Message Length](/images/msg_len_dist.png)
 ![Total Message per Category](/images/msg_per_category.png)
 
