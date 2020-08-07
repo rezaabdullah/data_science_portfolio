@@ -51,7 +51,10 @@ To create end-to-end solution, the project adhere to the three steps of data ana
 3. Go to http://0.0.0.0:3001/
 
 ### Improvements
-The model is a RandomForest classifier and it takes about couple of hours to train the model. Furthermore, if the number of feature i.e. number of tress are more than 150, the training process out of memory. Since the problem is a multiclass multioutput problem, **Multinomial Naive Bayes** classifier can significantly improve the training performance with comparatively similar model performance.
+The model is a RandomForest classifier and it takes about couple of hours to train the model. Furthermore, if the number of feature i.e. number of trees are more than 150, the training process raise out of memory. Since the problem is a multiclass multioutput problem, **Multinomial Naive Bayes** classifier can significantly improve the training performance with comparatively similar model performance.
+
+### Conclusion
+Since the model will facilitate collaboration among various emergency teams, the higher the precision (higher true positives) the better. In addtion, other classification technique may yield better training performance by reducing hours required for training the model.
 
 ### Required Libraries
 1. Pandas, Sciki-Learn
