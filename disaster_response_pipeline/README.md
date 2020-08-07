@@ -62,10 +62,10 @@ The model is a RandomForest classifier and it takes about couple of hours to tra
 
 ### Example of the Dashboard
 ![Message Classification](images/classification_result.jpg)  
-![Distribution of Message Genre](images/msg_dist.png)
-![Distribution of Message Length](/images/msg_len_dist.png)
-![Total Message per Category](/images/msg_per_category.png)
+![Distribution of Message Genre](images/msg_dist.png)  
+![Distribution of Message Length](images/msg_len_dist.png)  
+![Total Message per Category](images/msg_per_category.png)  
 
 ### Acknowledgement
-- [Figure Eight](https://appen.com/) (They have been acquired by Appen)
+- [Figure Eight](https://appen.com/) (They have been recently acquired by Appen)
 - [Udacity](https://www.udacity.com/)
