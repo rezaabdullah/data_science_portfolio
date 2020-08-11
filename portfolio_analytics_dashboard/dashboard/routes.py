@@ -1,19 +1,22 @@
 from dashboard import app
 from flask import render_template
-from data_preprocessing.data_wrangling import clean_data, top_district
+from data_preprocessing.data_wrangling import create_plot
 import pandas as pd
 
-# Clean dataset
-clean_df = clean_data()
-
-# Filter out top 5 districts that has the highest number of audience
-topdistrict = top_district(clean_df, 5)
+import plotly.graph_objs as go
+import plotly.express as px
+import plotly, json
 
 @app.route("/")
 @app.route("/index")
 def index():
-    return render_template("index.html")
+    # Create chart
+    figures = create_plot()
 
-@app.route("/dashboard-portfolio")
-def dashboard_portfolio():
-    return render_template(dashboard_portfolio.html)
+    # plot ids for the html id tag
+    ids = ["figure-{}".format(i) for i, _ in enumerate(figures)]
+
+    # Convert the plotly figures to JSON for javascript in html template
+    figuresJSON = json.dumps(figures, cls = plotly.utils.PlotlyJSONEncoder)
+
+    return render_template("index.html", ids = ids, figuresJSON = figuresJSON)
