@@ -50,7 +50,6 @@
                 <a href="#"><img class="img-fluid" src="..\asset\images\scatter_plot_4.png" alt="scatter_plot_4"></a>
             </div>
         </div>
-        -->
     </div>
     <div id = "charts" class = "container mt-3 text-center">
         <div class = "row">
@@ -70,6 +69,16 @@
 </body>
 
 <footer>
-    <script src = "plot_placement.js"></script>
+    <script type="text/javascript">
+        // plots the figure with id
+        // id must match the div id above in the html
+        var figures = {{figuresJSON | safe}};
+        var ids = {{ids | safe}};
+        for(var i in figures) {
+            Plotly.plot(ids[i],
+                figures[i].data,
+                figures[i].layout || {});
+        }
+    </script>
 </footer>
 </html>
