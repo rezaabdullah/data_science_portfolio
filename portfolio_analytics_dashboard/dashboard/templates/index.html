@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    <!-- navbar links -->
     <nav class="navbar navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
     <a class="navbar-brand font-weight-bold text-info ml-1" href="#">OOH Media Asset Management</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,34 +28,34 @@
         </div>
     </nav>
 
-    <div>
-        <div class="row ml-1 mt-1">
-            <div class="col-12">
-                <h2>Media Asset Dashboard</h2>
-                <h4 class="text-muted">Kuala Lumpur Billboards Performance Monitor</h4>
+    <!-- Middle Section -->
+    <div class = "row">
+        <div id = "charts" class = "container mt-3 text-center">
+            <div class = "row ml-1 mt-3">
+                <div class = "col-12">
+                    <h4 class="text-muted">District Level Analysis</h4>
+                </div>
             </div>
-        </div>
-        <div class="row ml-1 mt-1 mr-1 mb-1">
-            <div class="col-7 border">
-                <a href="#"><img class="img-fluid" src="..\asset\images\scatter_plot_1.png" alt="scatter_plot_1"></a>
+            <div class = "row ml-1 mt-3">
+                <div class = "col-7">
+                    <div id = "{{ids[0]}}"></div>
+                </div>
+                <div class = "col-5">
+                    <div id = "{{ids[1]}}"></div>
+                </div>
             </div>
-            <div class="col-5 border">
-                <a href="#"><img class="img-fluid" src="..\asset\images\scatter_plot_2.png" alt="scatter_plot_2"></a>
+            <div class = "row ml-1 mt-3">
+                <div class = "col-12">
+                    <h4 class="text-muted">Billboard Analysis</h4>
+                </div>
             </div>
-        </div>
-        <div class="row row ml-1 mt-1 mr-1 mb-1">
-            <div class="col-7 border">
-                <a href="#"><img class="img-fluid" src="..\asset\images\scatter_plot_3.png" alt="scatter_plot_3"></a>
-            </div>
-            <div class="col-5 border">
-                <a href="#"><img class="img-fluid" src="..\asset\images\scatter_plot_4.png" alt="scatter_plot_4"></a>
-            </div>
-        </div>
-    </div>
-    <div id = "charts" class = "container mt-3 text-center">
-        <div class = "row">
-            <div class = "col-12">
-                <div id = "{{ids[0]}}"></div>
+            <div class = "row ml-1 mt-3">
+                <div class = "col-7">
+                    <div id = "{{ids[2]}}"></div>
+                </div>
+                <div class = "col-5">
+                    <div id = "{{ids[3]}}"></div>
+                </div>
             </div>
         </div>
     </div>
