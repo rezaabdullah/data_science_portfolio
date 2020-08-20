@@ -1,2 +1,7 @@
 Project 1/.mapbox_token
+capstone/*.csv
+capstone/*.xlsx
+portfolio_analytics_dashboard/dashboard/__pycache__/routes.cpython-37.pyc
+portfolio_analytics_dashboard/dashboard/asset/token/
+portfolio_analytics_dashboard/data_preprocessing/__pycache__/
 Git Tutorial
