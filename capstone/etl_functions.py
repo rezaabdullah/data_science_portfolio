@@ -2,6 +2,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Load data
 def load_data(azdias_filepath, customers_filepath, attributes_filepath, attributes_desc_filepath):
@@ -196,3 +197,28 @@ def clean_data(df1, df2, df3, feat_list, drop_feat):
     df2.drop(drop_row, axis=0, inplace=True)
     
     return df1, df2
+
+# Plot comparison of value distribution in two dataframe
+def plot_comparison(column, df1, df2):
+    """
+    Method for plotting comparison of value distribution among two dataframes
+    
+    Args:
+        column (series): Series from a feature
+        df1 (Pandas Dataframe): azdias dataset
+        df2 (Pandas Dataframe): customers dataset
+        
+    Output:
+        None
+    """
+    
+    sns.set(style="darkgrid")
+    fig, (ax1, ax2) = plt.subplots(figsize=(12,4), ncols=2)
+    sns.countplot(x = column, data=df1, ax=ax1, palette="Set3")
+    ax1.set_xlabel('Value')
+    ax1.set_title('Distribution of feature in AZDIAS dataset')
+    sns.countplot(x = column, data=df2, ax=ax2, palette="Set3")
+    ax2.set_xlabel('Value')
+    ax2.set_title('Distribution of feature in CUSTOMERS dataset')
+    fig.tight_layout()
+    plt.show()
