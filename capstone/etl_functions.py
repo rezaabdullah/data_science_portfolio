@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler
 
 # Load data
 def load_data(azdias_filepath, customers_filepath, attributes_filepath, attributes_desc_filepath):
@@ -212,6 +214,7 @@ def plot_comparison(column, df1, df2):
         None
     """
     
+    print(column)
     sns.set(style="darkgrid")
     fig, (ax1, ax2) = plt.subplots(figsize=(12,4), ncols=2)
     sns.countplot(x = column, data=df1, ax=ax1, palette="Set3")
@@ -222,3 +225,37 @@ def plot_comparison(column, df1, df2):
     ax2.set_title('Distribution of feature in CUSTOMERS dataset')
     fig.tight_layout()
     plt.show()
+    
+# Feature Engineering
+def feat_eng(df1, df2):
+    """
+    Method for feature engineering & encoding & scaling the data
+    
+    Args:
+        df1 (Pandas Dataframe): azdias dataset
+        df2 (Pandas Dataframe): customers dataset
+        
+    Output:
+        df1: Scaled azdias dataframe
+        df2: Scaled customers dataframe
+    """
+    
+    # OST_WEST_KZ needs to be encoded since the data are strings
+    df1["OST_WEST_KZ"].replace(["W", "O"], [0, 1], inplace=True)
+    df2["OST_WEST_KZ"].replace(["W", "O"], [0, 1], inplace=True)
+    
+    # Impute numeric columns
+    imputer = SimpleImputer(missing_values=np.nan, strategy='median')
+    df1 = pd.DataFrame(imputer.fit_transform(df1), columns = df1.columns)
+    df2 = pd.DataFrame(imputer.fit_transform(df2), columns = df2.columns)
+    
+    # Standardize the data
+    scaler = StandardScaler()
+    df1_scaled = scaler.fit_transform(df1)
+    df2_scaled = scaler.transform(df2)
+    
+    # Create dataframe from scaled dataset
+    df1 = pd.DataFrame(data=df1_scaled, index=df1.index, columns=df1.columns)
+    df2 = pd.DataFrame(data=df2_scaled, index=df2.index, columns=df2.columns)
+    
+    return df1, df2
